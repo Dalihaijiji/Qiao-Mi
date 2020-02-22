@@ -1,0 +1,22 @@
+Problem:
+Given an array of integers arr, write a function that returns true if and only if the number of occurrences of 
+each value in the array is unique.
+
+Example1 : Input: arr = [1,2,2,1,1,3]
+Output: true
+Explanation: The value 1 has 3 occurrences, 2 has 2 and 3 has 1. No two values have the same number of occurrences.
+
+思路： 还是用set() to count() the frequency of number of occurence. 
+
+class Solution:
+    def uniqueOccurrences(self, arr: List[int]) -> bool:
+        fre = []
+        for a in set(arr):
+            if not arr.count(a) in fre:
+                fre.append(arr.count(a))
+            else: return False 
+        return True
+        
+Notify: if not.... in fre:(if arr.count(a) is not in fre, then do)
+        if it is already in, return False as the result,
+        if the loop successfully append all the element into the array, then return successful. 
