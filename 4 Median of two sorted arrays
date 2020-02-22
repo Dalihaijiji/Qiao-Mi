@@ -36,3 +36,15 @@ class Solution:
                 
         
         return median
+        
+## 二月22日重新回看：思路于上次想的没有太大区别，但是更简洁了。 还是要注意array的index是从0开始的，容易出错     
+
+class Solution:
+    def findMedianSortedArrays(self, nums1: List[int], nums2: List[int]) -> float:
+        j = nums1 + nums2 
+        j.sort()
+        l = len(j)
+        if l%2 == 0:
+            return (j[int(l/2-1)] + j[int(l/2)])/2 
+        else: 
+            return j[int(l/2+0.5-1)]
