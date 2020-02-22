@@ -1,0 +1,30 @@
+难度：Easy
+##这道题没什么难度，但是从看答案学到了一个新的工具：Counter
+example:
+  from collections import Counter as C
+  a = "aaaAA"
+  c = C(a)
+  print(c)
+  
+  会print出来：Counter({'a': 3, 'A': 2})
+  
+#回到这道题
+You're given strings J representing the types of stones that are jewels, and S representing the stones you have.  
+Each character in S is a type of stone you have.  You want to know how many of the stones you have are also jewels.
+
+The letters in J are guaranteed distinct, and all characters in J and S are letters. Letters are case sensitive,
+so "a" is considered a different type of stone from "A".
+
+Input: J = "aA", S = "aAAbbbb"
+Output: 3
+
+##感觉不用Counter，主要是因为不知道怎么把'a' 'A'两个加起来，于是就用笨办法了
+
+class Solution:
+    def numJewelsInStones(self, J: str, S: str) -> int:
+        count = 0
+        for stone in S:
+            if stone in J:
+                count +=1 
+        return count
+                
