@@ -1,0 +1,25 @@
+##题干：In a array A of size 2N, there are N+1 unique elements, and exactly one of these elements is repeated N times.
+
+Return the element repeated N times.
+
+Input: [1,2,3,3]
+Output: 3
+
+## 用了个新的工具 set() 这个会return 一个array里不重复的element 比如：
+A = [1,2,3,3]
+print(set(A))
+{1, 2, 3}
+
+答案就比较简单了
+class Solution:
+    def repeatedNTimes(self, A: List[int]) -> int:
+        repeat = len(A)/2
+        for a in set(A):
+            if A.count(a) == repeat: 
+                return a 
+但是这个方法比较慢
+
+class Solution:
+    def repeatedNTimes(self, A: List[int]) -> int:
+        return (lambda x: max(x, key = lambda y: x[y]))(collections.Counter(A))
+这个快一些
