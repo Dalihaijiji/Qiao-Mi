@@ -1,0 +1,47 @@
+这题思路很难想，但是问题本身不难。思路可以从字母出现的频率出发，chars里的字母出现的频率要比words里的多才行，which make sense
+
+You are given an array of strings words and a string chars.
+A string is good if it can be formed by characters from chars (each character can only be used once).
+Return the sum of lengths of all good strings in words.
+
+Input: words = ["cat","bt","hat","tree"], chars = "atach"
+Output: 6
+Explanation: 
+The strings that can be formed are "cat" and "hat" so the answer is 3 + 3 = 6.
+
+方法一：class Solution:
+    def countCharacters(self, words: List[str], chars: str) -> int:
+        res = 0 
+        for word in words:
+            if all(collections.Counter(word)[ch] <= collections.Counter(chars)[ch] for ch in word):
+                res += len(word)
+        return res
+注释：这个all()语句会return true if 括号里所有条件都满足。来看这个loop，collections.Counter()会数这个word里每个字母出现的频率
+像这样：Counter({'blue': 3, 'red': 2, 'green': 1}) 在collections.Counter()后加上[]就相当于提取出来[]里字母的频率，没有return 0.
+这个if statement说：如果word里的每一个字母ch在word里出现的频率要比chars里少就说明能组成这个单词。 如果word里的某个字母ch在chars里没有，
+那自然if statement不成立，false。如果成立就更新res长度。循环words次。输出res
+
+另一个解法，更简单更好理解
+class Solution:
+    def countCharacters(self, words: List[str], chars: str) -> int:
+          
+        list_of_success = []
+        
+        # visit each word
+        for word in words:
+            
+            # check each character
+            for character in word:
+                
+                if word.count( character ) > chars.count( character ):
+                    # miss:
+                    # chars has no enough characters to make the word
+                    break
+                    
+            else:
+                # hit:
+                # add the word into list of success
+                list_of_success.append( word )
+                
+                
+        return len ( ''.join( list_of_success) )
